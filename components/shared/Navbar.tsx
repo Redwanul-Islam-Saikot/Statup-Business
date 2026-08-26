@@ -13,8 +13,8 @@ export default function Navbar() {
         <img src="/logo.png" alt="Epixelab Logo" style={{ height: "40px", width: "auto" }} />
       </div>
 
-      {/* Nav Links - Desktop */}
-      <ul style={styles.navLinks} className="desktop-nav-links">
+      {/* Nav Links - Desktop (Laptops & Desktops-এ দেখাবে, Medium & Small-এ হাইড) */}
+      <ul style={styles.navLinks} className="hidden lg:flex">
         {navLinks.map((link) => (
           <li key={link}>
             <button
@@ -30,17 +30,18 @@ export default function Navbar() {
         ))}
       </ul>
 
-      {/* Auth Buttons - Desktop */}
-      <div style={styles.authButtons} className="desktop-auth-buttons">
+      {/* Auth Buttons - Desktop (Laptops & Desktops-এ দেখাবে, Medium & Small-এ হাইড) */}
+      <div style={styles.authButtons} className="hidden lg:flex">
         <button style={styles.loginBtn}>Log in</button>
         <button style={styles.signupBtn}>Sign up</button>
       </div>
 
-      {/* Mobile Menu Button */}
+      {/* Mobile & Tablet Menu Button (Long Screen-এ হাইড থাকবে, Medium ও Small-এ দেখাবে) */}
       <button
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         style={styles.mobileMenuBtn}
-        className="mobile-menu-btn"
+        className="flex lg:hidden"
+        aria-label="Toggle Menu"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <line x1="3" y1="6" x2="21" y2="6" strokeWidth="2" />
@@ -49,9 +50,9 @@ export default function Navbar() {
         </svg>
       </button>
 
-      {/* Mobile Menu */}
+      {/* Mobile & Tablet Menu Content */}
       {mobileMenuOpen && (
-        <div style={styles.mobileMenu}>
+        <div style={styles.mobileMenu} className="block lg:hidden">
           <ul style={styles.mobileNavLinks}>
             {navLinks.map((link) => (
               <li key={link}>
@@ -100,16 +101,7 @@ const styles: Record<string, CSSProperties> = {
     userSelect: "none",
     minWidth: "120px",
   },
-  logoAccent: {
-    color: "#F26419",
-    fontStyle: "italic",
-  },
-  logoBlack: {
-    color: "#111111",
-    fontWeight: 400,
-  },
   navLinks: {
-    display: "flex",
     listStyle: "none",
     margin: 0,
     padding: 0,
@@ -134,7 +126,6 @@ const styles: Record<string, CSSProperties> = {
     color: "#111111",
   },
   authButtons: {
-    display: "flex",
     alignItems: "center",
     gap: "12px",
   },
@@ -165,9 +156,8 @@ const styles: Record<string, CSSProperties> = {
     whiteSpace: "nowrap",
   },
 
-  /* Mobile Menu */
+  /* Mobile & Tablet Styles */
   mobileMenuBtn: {
-    display: "flex",
     alignItems: "center",
     justifyContent: "center",
     background: "none",
@@ -175,7 +165,6 @@ const styles: Record<string, CSSProperties> = {
     cursor: "pointer",
     color: "#333333",
     padding: "8px",
-    fontSize: "24px",
   },
   mobileMenu: {
     position: "absolute",
@@ -208,6 +197,7 @@ const styles: Record<string, CSSProperties> = {
     letterSpacing: "0.01em",
     transition: "color 0.15s",
     textAlign: "left",
+    width: "100%",
   },
   mobileNavLinkActive: {
     fontWeight: 700,
